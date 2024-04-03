@@ -1,46 +1,15 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Amazon from "./components/Amazon";
 import Cart from "./components/Cart";
-import { CartContext, CartProvider } from "./store/CartProvider";
+import { CartContext } from "./store/CartProvider";
 
 function App() {
   const { warning, show } = useContext(CartContext);
 
-  // const [cart, setCart] = useState([]);
-
-  // const handleCount = (item) => {
-  //   let isPresent = false;
-  //   cart.forEach((product) => {
-  //     if (item.id === product.id) isPresent = true;
-  //   });
-
-  //   if (isPresent) {
-  //     setWarning(true);
-  //     setTimeout(() => {
-  //       setWarning(false);
-  //     }, 2000);
-  //     return;
-  //   }
-  //   setCart([...cart, item]);
-  // };
-
-  // const handleChange = (item, d) => {
-  //   let ind = -1;
-  //   cart.forEach((data, index) => {
-  //     if (data.id === item.id) ind = index;
-  //   });
-
-  //   const tempArr = cart;
-  //   tempArr[ind].amount += d;
-  //   if (tempArr[ind].amount === 0) tempArr[ind].amount = 1;
-
-  //   setCart([...tempArr]);
-  // };
-
   return (
-    <CartProvider>
+    <>
       <Navbar />
       {show ? <Amazon /> : <Cart />}
 
@@ -51,7 +20,7 @@ function App() {
           </div>
         )}
       </div>
-    </CartProvider>
+    </>
   );
 }
 

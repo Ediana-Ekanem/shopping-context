@@ -5,7 +5,23 @@ import PropTypes from "prop-types";
 import { CartContext } from "../store/CartProvider";
 
 const Amazon = () => {
-  const { handleCount } = useContext(CartContext);
+  const { cart, setCart, setWarning } = useContext(CartContext);
+  const handleCount = (item) => {
+    let isPresent = false;
+    cart.forEach((product) => {
+      if (item.id === product.id) isPresent = true;
+    });
+
+    if (isPresent) {
+      setWarning(true);
+      setTimeout(() => {
+        setWarning(false);
+      }, 2000);
+      return;
+    }
+    setCart([...cart, item]);
+  };
+
   return (
     <>
       <section className="container mt-10">

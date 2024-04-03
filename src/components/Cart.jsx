@@ -5,7 +5,7 @@ import { CartContext } from "../store/CartProvider";
 const Cart = () => {
   const [price, setPrice] = useState(0);
 
-  const { cart, setCart, handleChange } = useContext(CartContext);
+  const { cart, setCart } = useContext(CartContext);
 
   const handlePrice = () => {
     let ans = 0;
@@ -22,6 +22,19 @@ const Cart = () => {
     const arr = cart.filter((item) => item.id !== id);
     setCart(arr);
     handlePrice();
+  };
+
+  const handleChange = (item, d) => {
+    let ind = -1;
+    cart.forEach((data, index) => {
+      if (data.id === item.id) ind = index;
+    });
+
+    const tempArr = cart;
+    tempArr[ind].amount += d;
+    if (tempArr[ind].amount === 0) tempArr[ind].amount = 1;
+
+    setCart([...tempArr]);
   };
 
   return (
